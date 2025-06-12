@@ -1,5 +1,5 @@
-model_name = "Qwen/Qwen2.5-Math-1.5B"
-local_path = "/home/user/cs336-a5-RL/models/Qwen2.5-Math-1.5B"
+model_name = "openai-community/gpt2" #"Qwen/Qwen2.5-Math-1.5B"
+local_path = "models_local/gpt2" #"models_local/Qwen2.5-Math-1.5B"
 
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
