@@ -94,7 +94,7 @@ def load_policy_into_vllm_instance(policy: PreTrainedModel, llm: LLM):
 #You need to pass in the model (for getting entropy, etc) AND the llm/sampling_params that has the equivalent model loaded into it (for generation)
 def log_generations(step, model, tokenizer, llm, outpath, num_prompts=None):
     #read in dataset
-    MATH_val_fpath = "/data/a5-alignment/MATH/validation.jsonl"
+    MATH_val_fpath = "/home/user/cs336-a5-RL/MATH/validation.jsonl"
     dataset = []
     with open(MATH_val_fpath, 'r') as file:
         for line in file:
@@ -105,7 +105,7 @@ def log_generations(step, model, tokenizer, llm, outpath, num_prompts=None):
     answers = [data["answer"] for data in dataset]
     
     #get prompts
-    prompt_fpath = "prompts/r1_zero.prompt"
+    prompt_fpath = "/home/user/cs336-a5-RL/cs336_alignment/prompts/r1_zero.prompt"
     with open(prompt_fpath, "r") as file:
         prompt_template = file.read()
     prompts = [prompt_template.format(question=question) for question in questions]
