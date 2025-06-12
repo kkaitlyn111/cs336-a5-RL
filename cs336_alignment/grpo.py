@@ -245,7 +245,7 @@ def parse_args():
 
     parser.add_argument("--model_id", type=str, default="Qwen/Qwen2.5-Math-1.5B", help="Model ID or path to the model")
     parser.add_argument("--dataset_train_fpath", type=str, default="/home/user/cs336-a5-RL/MATH/train.jsonl", help="Path to training dataset")
-    parser.add_argument("--prompt_fpath", type=str, default="/home/user/cs336-a5-RL/prompts/r1_zero.prompt", help="Path to prompt template")
+    parser.add_argument("--prompt_fpath", type=str, default="/home/user/cs336-a5-RL/cs336_alignment/prompts/r1_zero.prompt", help="Path to prompt template")
     parser.add_argument("--n_grpo_steps", type=int, default=50, help="Number of GRPO training steps")
     parser.add_argument("--lr", type=float, default=1e-5, help="Learning rate")
     parser.add_argument("--advantage_eps", type=float, default=1e-6, help="Epsilon for advantage normalization")
@@ -301,5 +301,16 @@ def parse_args():
 
 
 if __name__ == "__main__":
+    lr = 0.00005
+    loss_type = "reinforce_with_baseline"
+    use_std_normalization = True
+    use_constant_length_normalization = True
+    grpo_num_eval_samples = 500
+    n_grpo_steps = 1000000
     cfg = parse_args()
+    cfg["loss_type"] = loss_type
+    cfg["use_std_normalization"] = use_std_normalization
+    cfg["use_constant_length_normalization"] = use_constant_length_normalization
+    cfg["grpo_num_eval_samples"] = grpo_num_eval_samples
+    cfg["n_grpo_steps"] = n_grpo_steps
     train_grpo(cfg)

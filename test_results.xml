@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="31" time="10.084" timestamp="2025-06-12T07:01:35.740726+00:00" hostname="5ee55ab2-c9bf-4775-9fd1-a2603e60c6d4"><testcase classname="tests.test_data" name="test_packed_sft_dataset" time="0.325"><failure message="NotImplementedError">def test_packed_sft_dataset():
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="31" time="10.289" timestamp="2025-06-12T15:24:19.588140+00:00" hostname="5ee55ab2-c9bf-4775-9fd1-a2603e60c6d4"><testcase classname="tests.test_data" name="test_packed_sft_dataset" time="0.361"><failure message="NotImplementedError">def test_packed_sft_dataset():
         sft_sample_path = FIXTURES_PATH / "sft_sample.jsonl"
         tokenizer = AutoTokenizer.from_pretrained(FIXTURES_PATH / "Meta-Llama-3-8B")
         seq_length = 32
@@ -10,12 +10,13 @@
         )
 
 tests/test_data.py:18: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 tokenizer = PreTrainedTokenizerFast(name_or_path='/home/user/cs336-a5-RL/tests/fixtures/Meta-Llama-3-8B', vocab_size=128000, model...n("&lt;|reserved_special_token_250|&gt;", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
 }
 )
-dataset_path = PosixPath('/home/user/cs336-a5-RL/tests/fixtures/sft_sample.jsonl'), seq_length = 32, shuffle = False
+dataset_path = PosixPath('/home/user/cs336-a5-RL/tests/fixtures/sft_sample.jsonl'), seq_length = 32
+shuffle = False
 
     def get_packed_sft_dataset(
         tokenizer: PreTrainedTokenizerBase,
@@ -47,7 +48,7 @@ dataset_path = PosixPath('/home/user/cs336-a5-RL/tests/fixtures/sft_sample.jsonl
 &gt;       raise NotImplementedError
 E       NotImplementedError
 
-tests/adapters.py:317: NotImplementedError</failure></testcase><testcase classname="tests.test_data" name="test_iterate_batches" time="0.305"><failure message="NotImplementedError">def test_iterate_batches():
+tests/adapters.py:318: NotImplementedError</failure></testcase><testcase classname="tests.test_data" name="test_iterate_batches" time="0.344"><failure message="NotImplementedError">def test_iterate_batches():
         sft_sample_path = FIXTURES_PATH / "sft_sample.jsonl"
         tokenizer = AutoTokenizer.from_pretrained(FIXTURES_PATH / "Meta-Llama-3-8B")
         seq_length = 32
@@ -60,12 +61,13 @@ tests/adapters.py:317: NotImplementedError</failure></testcase><testcase classna
         )
 
 tests/test_data.py:60: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 tokenizer = PreTrainedTokenizerFast(name_or_path='/home/user/cs336-a5-RL/tests/fixtures/Meta-Llama-3-8B', vocab_size=128000, model...n("&lt;|reserved_special_token_250|&gt;", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
 }
 )
-dataset_path = PosixPath('/home/user/cs336-a5-RL/tests/fixtures/sft_sample.jsonl'), seq_length = 32, shuffle = True
+dataset_path = PosixPath('/home/user/cs336-a5-RL/tests/fixtures/sft_sample.jsonl'), seq_length = 32
+shuffle = True
 
     def get_packed_sft_dataset(
         tokenizer: PreTrainedTokenizerBase,
@@ -97,7 +99,7 @@ dataset_path = PosixPath('/home/user/cs336-a5-RL/tests/fixtures/sft_sample.jsonl
 &gt;       raise NotImplementedError
 E       NotImplementedError
 
-tests/adapters.py:317: NotImplementedError</failure></testcase><testcase classname="tests.test_dpo" name="test_per_instance_dpo_loss" time="5.525"><failure message="NotImplementedError">def test_per_instance_dpo_loss():
+tests/adapters.py:318: NotImplementedError</failure></testcase><testcase classname="tests.test_dpo" name="test_per_instance_dpo_loss" time="5.592"><failure message="NotImplementedError">def test_per_instance_dpo_loss():
         tokenizer = AutoTokenizer.from_pretrained("gpt2")
     
         model = AutoModelForCausalLM.from_pretrained(FIXTURES_PATH / "tiny-gpt2")
@@ -118,7 +120,7 @@ tests/adapters.py:317: NotImplementedError</failure></testcase><testcase classna
         )
 
 tests/test_dpo.py:18: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 lm = GPT2LMHeadModel(
   (transformer): GPT2Model(
@@ -140,7 +142,8 @@ tokenizer = GPT2TokenizerFast(name_or_path='gpt2', vocab_size=50257, model_max_l
 	50256: AddedToken("&lt;|endoftext|&gt;", rstrip=False, lstrip=False, single_word=False, normalized=True, special=True),
 }
 )
-beta = 0.5, prompt = 'The quick brown fox jumps over', response_chosen = 'the lazy dog.', response_rejected = 'their crazy frog.'
+beta = 0.5, prompt = 'The quick brown fox jumps over', response_chosen = 'the lazy dog.'
+response_rejected = 'their crazy frog.'
 
     def run_compute_per_instance_dpo_loss(
         lm: torch.nn.Module,
@@ -177,7 +180,7 @@ beta = 0.5, prompt = 'The quick brown fox jumps over', response_chosen = 'the la
 &gt;       raise NotImplementedError
 E       NotImplementedError
 
-tests/adapters.py:418: NotImplementedError</failure></testcase><testcase classname="tests.test_grpo" name="test_compute_group_normalized_rewards_normalize_by_std" time="1.248" /><testcase classname="tests.test_grpo" name="test_compute_group_normalized_rewards_no_normalize_by_std" time="0.001" /><testcase classname="tests.test_grpo" name="test_compute_naive_policy_gradient_loss" time="0.003" /><testcase classname="tests.test_grpo" name="test_compute_grpo_clip_loss_large_cliprange" time="0.002" /><testcase classname="tests.test_grpo" name="test_compute_grpo_clip_loss_small_cliprange" time="0.002" /><testcase classname="tests.test_grpo" name="test_compute_policy_gradient_loss_no_baseline" time="0.002" /><testcase classname="tests.test_grpo" name="test_compute_policy_gradient_loss_reinforce_with_baseline" time="0.002" /><testcase classname="tests.test_grpo" name="test_compute_policy_gradient_loss_grpo_clip" time="0.002" /><testcase classname="tests.test_grpo" name="test_masked_mean_dim0" time="0.002" /><testcase classname="tests.test_grpo" name="test_masked_mean_dim1" time="0.002" /><testcase classname="tests.test_grpo" name="test_masked_mean_dimlast" time="0.002" /><testcase classname="tests.test_grpo" name="test_masked_mean_dimNone" time="0.002" /><testcase classname="tests.test_grpo" name="test_grpo_microbatch_train_step_grpo_clip" time="0.003" /><testcase classname="tests.test_grpo" name="test_grpo_microbatch_train_step_grpo_clip_10_steps" time="0.005" /><testcase classname="tests.test_metrics" name="test_parse_mmlu_response" time="0.000"><failure message="NotImplementedError">def test_parse_mmlu_response():
+tests/adapters.py:419: NotImplementedError</failure></testcase><testcase classname="tests.test_grpo" name="test_compute_group_normalized_rewards_normalize_by_std" time="1.935" /><testcase classname="tests.test_grpo" name="test_compute_group_normalized_rewards_no_normalize_by_std" time="0.002" /><testcase classname="tests.test_grpo" name="test_compute_naive_policy_gradient_loss" time="0.002" /><testcase classname="tests.test_grpo" name="test_compute_grpo_clip_loss_large_cliprange" time="0.002" /><testcase classname="tests.test_grpo" name="test_compute_grpo_clip_loss_small_cliprange" time="0.002" /><testcase classname="tests.test_grpo" name="test_compute_policy_gradient_loss_no_baseline" time="0.002" /><testcase classname="tests.test_grpo" name="test_compute_policy_gradient_loss_reinforce_with_baseline" time="0.002" /><testcase classname="tests.test_grpo" name="test_compute_policy_gradient_loss_grpo_clip" time="0.002" /><testcase classname="tests.test_grpo" name="test_masked_mean_dim0" time="0.002" /><testcase classname="tests.test_grpo" name="test_masked_mean_dim1" time="0.002" /><testcase classname="tests.test_grpo" name="test_masked_mean_dimlast" time="0.002" /><testcase classname="tests.test_grpo" name="test_masked_mean_dimNone" time="0.001" /><testcase classname="tests.test_grpo" name="test_grpo_microbatch_train_step_grpo_clip" time="0.003" /><testcase classname="tests.test_grpo" name="test_grpo_microbatch_train_step_grpo_clip_10_steps" time="0.004" /><testcase classname="tests.test_metrics" name="test_parse_mmlu_response" time="0.000"><failure message="NotImplementedError">def test_parse_mmlu_response():
         mmlu_example = {
             "subject": "virology",
             "question": "How many human polyomaviruses are known at present?",
@@ -193,7 +196,7 @@ tests/adapters.py:418: NotImplementedError</failure></testcase><testcase classna
         )
 
 tests/test_metrics.py:19: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 mmlu_example = {'answer': 'A', 'options': ['100', '1', '10', 'unknown'], 'question': 'How many human polyomaviruses are known at present?', 'subject': 'virology'}
 model_output = 'The correct answer is B. There is only one human polyomavirus known at present, which is the BK virus.'
@@ -224,7 +227,7 @@ model_output = 'The correct answer is B. There is only one human polyomavirus kn
 &gt;       raise NotImplementedError
 E       NotImplementedError
 
-tests/adapters.py:366: NotImplementedError</failure></testcase><testcase classname="tests.test_metrics" name="test_parse_mmlu_response_unknown" time="0.000"><failure message="NotImplementedError">def test_parse_mmlu_response_unknown():
+tests/adapters.py:367: NotImplementedError</failure></testcase><testcase classname="tests.test_metrics" name="test_parse_mmlu_response_unknown" time="0.000"><failure message="NotImplementedError">def test_parse_mmlu_response_unknown():
         mmlu_example = {
             "subject": "virology",
             "question": "How many human polyomaviruses are known at present?",
@@ -237,7 +240,7 @@ tests/adapters.py:366: NotImplementedError</failure></testcase><testcase classna
         )
 
 tests/test_metrics.py:33: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 mmlu_example = {'answer': 'A', 'options': ['100', '1', '10', 'unknown'], 'question': 'How many human polyomaviruses are known at present?', 'subject': 'virology'}
 model_output = 'The correct answer is 10000 polyomaviruses.'
@@ -268,7 +271,7 @@ model_output = 'The correct answer is 10000 polyomaviruses.'
 &gt;       raise NotImplementedError
 E       NotImplementedError
 
-tests/adapters.py:366: NotImplementedError</failure></testcase><testcase classname="tests.test_metrics" name="test_parse_gsm8k_response" time="0.000"><failure message="NotImplementedError">def test_parse_gsm8k_response():
+tests/adapters.py:367: NotImplementedError</failure></testcase><testcase classname="tests.test_metrics" name="test_parse_gsm8k_response" time="0.000"><failure message="NotImplementedError">def test_parse_gsm8k_response():
         model_output = (
             "Natalia sold 48/2 = 24 clips in May. "
             "Natalia sold 48+24 = 72 clips altogether in April and May."
@@ -276,7 +279,7 @@ tests/adapters.py:366: NotImplementedError</failure></testcase><testcase classna
 &gt;       parsed_response = run_parse_gsm8k_response(model_output=model_output)
 
 tests/test_metrics.py:44: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 model_output = 'Natalia sold 48/2 = 24 clips in May. Natalia sold 48+24 = 72 clips altogether in April and May.'
 
@@ -297,7 +300,7 @@ model_output = 'Natalia sold 48/2 = 24 clips in May. Natalia sold 48+24 = 72 cli
 &gt;       raise NotImplementedError
 E       NotImplementedError
 
-tests/adapters.py:383: NotImplementedError</failure></testcase><testcase classname="tests.test_metrics" name="test_parse_gsm8k_response_unknown" time="0.000"><failure message="NotImplementedError">def test_parse_gsm8k_response_unknown():
+tests/adapters.py:384: NotImplementedError</failure></testcase><testcase classname="tests.test_metrics" name="test_parse_gsm8k_response_unknown" time="0.000"><failure message="NotImplementedError">def test_parse_gsm8k_response_unknown():
         model_output = (
             "Natalia sold twenty-four clips in May. "
             "Thus, Natalia sold seventy-two clips altogether in April and May."
@@ -305,7 +308,7 @@ tests/adapters.py:383: NotImplementedError</failure></testcase><testcase classna
 &gt;       parsed_response = run_parse_gsm8k_response(model_output=model_output)
 
 tests/test_metrics.py:53: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 model_output = 'Natalia sold twenty-four clips in May. Thus, Natalia sold seventy-two clips altogether in April and May.'
 
@@ -326,4 +329,4 @@ model_output = 'Natalia sold twenty-four clips in May. Thus, Natalia sold sevent
 &gt;       raise NotImplementedError
 E       NotImplementedError
 
-tests/adapters.py:383: NotImplementedError</failure></testcase><testcase classname="tests.test_sft" name="test_tokenize_prompt_and_output" time="0.445" /><testcase classname="tests.test_sft" name="test_compute_entropy" time="0.002" /><testcase classname="tests.test_sft" name="test_get_response_log_probs" time="1.362" /><testcase classname="tests.test_sft" name="test_masked_normalize_dim0" time="0.002" /><testcase classname="tests.test_sft" name="test_masked_normalize_dim1" time="0.002" /><testcase classname="tests.test_sft" name="test_masked_normalize_dimlast" time="0.001" /><testcase classname="tests.test_sft" name="test_masked_normalize_dimNone" time="0.001" /><testcase classname="tests.test_sft" name="test_sft_microbatch_train_step" time="0.524" /><testcase classname="tests.test_sft" name="test_sft_microbatch_train_step_normalize" time="0.002" /><testcase classname="tests.test_sft" name="test_sft_microbatch_train_step_10_steps" time="0.003" /></testsuite></testsuites>
+tests/adapters.py:384: NotImplementedError</failure></testcase><testcase classname="tests.test_sft" name="test_tokenize_prompt_and_output" time="0.301" /><testcase classname="tests.test_sft" name="test_compute_entropy" time="0.002" /><testcase classname="tests.test_sft" name="test_get_response_log_probs" time="1.384" /><testcase classname="tests.test_sft" name="test_masked_normalize_dim0" time="0.002" /><testcase classname="tests.test_sft" name="test_masked_normalize_dim1" time="0.002" /><testcase classname="tests.test_sft" name="test_masked_normalize_dimlast" time="0.002" /><testcase classname="tests.test_sft" name="test_masked_normalize_dimNone" time="0.002" /><testcase classname="tests.test_sft" name="test_sft_microbatch_train_step" time="0.002" /><testcase classname="tests.test_sft" name="test_sft_microbatch_train_step_normalize" time="0.002" /><testcase classname="tests.test_sft" name="test_sft_microbatch_train_step_10_steps" time="0.005" /></testsuite></testsuites>

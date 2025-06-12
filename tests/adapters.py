@@ -80,7 +80,8 @@ def run_compute_group_normalized_rewards(
                 (some statistics of the rewards, etc.).
     """
     from cs336_alignment.grpo import compute_group_normalized_rewards
-    return compute_group_normalized_rewards(reward_fn, rollout_responses, repeated_ground_truths, group_size, advantage_eps, normalize_by_std)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    return compute_group_normalized_rewards(reward_fn, rollout_responses, repeated_ground_truths, group_size, advantage_eps, normalize_by_std, device=device)
 
 
 def run_compute_entropy(logits: torch.Tensor) -> torch.Tensor:
