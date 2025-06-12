@@ -5,7 +5,7 @@ import random
 import wandb
 import argparse
 from pathlib import Path
-from drgrpo_grader import r1_zero_reward_fn
+from cs336_alignment.drgrpo_grader import r1_zero_reward_fn
 from cs336_alignment.helpers import masked_normalize, tokenize_prompt_and_output, get_response_log_probs, log_generations, gradient_clipping
 from cs336_alignment.helpers import init_vllm, load_policy_into_vllm_instance
 from vllm import LLM, SamplingParams
@@ -151,7 +151,7 @@ def parse_args():
 
     #parser.add_argument("--model_id", type=str, default="models_local/Qwen2.5-Math-1.5B", help="Model ID or path to the model")
     parser.add_argument("--model_id", type=str, default="Qwen/Qwen2.5-Math-1.5B", help="Model ID or path to the model")
-    parser.add_argument("--dataset_train_fpath", type=str, default="/scratch/gpfs/kw6487/uv-test/assignment5-alignment/MATH/sft.jsonl", help="Path to training dataset")
+    parser.add_argument("--dataset_train_fpath", type=str, default="/home/user/cs336-a5-RL/MATH/sft.jsonl", help="Path to training dataset")
     parser.add_argument("--batch_size", type=int, default=32, help="Number of prompts in each batch")
     parser.add_argument("--lr", type=float, default=1e-4, help="Learning rate")
     parser.add_argument("--gradient_accumulation_steps", type=int, default=16, help="Number of gradient accumulation steps")

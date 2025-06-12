@@ -31,7 +31,7 @@ def tokenize_prompt_and_output(prompt_strs: list[str], output_strs: list[str], t
         labels[i, :n_potokens-1] = torch.tensor(potokens[1:])
         response_mask[i, n_ptokens-1:n_potokens-1] = True
     
-    input_ids = input_ids[:, :-1]
+    input_ids = input_ids[:, :-1] 
     labels = labels[:, :-1]
     response_mask = response_mask[:, :-1]
     
@@ -154,3 +154,40 @@ def log_generations(step, model, tokenizer, llm, outpath, num_prompts=None):
         pickle.dump(log, file)
     
     return log
+
+def model_eval(llm, num_prompts=None):
+    #read in dataset
+    MATH_val_fpath = "/scratch/gpfs/kw6487/uv-test/assignment5-alignment/MATH/validation.jsonl"
+    dataset = []
+    with open(MATH_val_fpath, 'r') as file:
+        for line in file:
+            dataset.append(json.loads(line))
+    if num_prompts is not None:
+        dataset = random.sample(dataset, num_prompts)
+    else:
+        num_prompts = len(dataset)
+    questions = [data["problem"] for data in dataset]
+    answers = [data["answer"] for data in dataset]
+    
+    #get prompts
+    prompt_fpath = "/scratch/gpfs/kw6487/uv-test/assignment5-alignment/cs336_alignment/prompts/r1_zero.prompt"
+    with open(prompt_fpath, "r") as file:
+        prompt_template = file.read()
+    prompts = [prompt_template.format(question=question) for question in questions]
+    
+    # llm = LLM(model=model)
+    sampling_params = SamplingParams(temperature=1.0, top_p=1.0, max_tokens=1024, stop=["</answer>"], include_stop_str_in_output=True)
+    outputs = llm.generate(prompts, sampling_params)
+
+    generations = []
+    evaluations = []
+    for output, answer in zip(outputs, answers):
+        generated_text = output.outputs[0].text
+        rewards = r1_zero_reward_fn(generated_text, answer)
+        generations.append(generated_text)
+        evaluations.append(rewards)
+    
+    format_accuracy = sum([reward["format_reward"] for reward in evaluations]) / num_prompts
+    answer_accuracy = sum([reward["answer_reward"] for reward in evaluations]) / num_prompts
+
+    return format_accuracy, answer_accuracy
