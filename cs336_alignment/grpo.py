@@ -137,10 +137,10 @@ def train_grpo(cfg):
     #initialize wandb
     run_name = f"qwen_GRPO_lr:{lr}"
     wandb.init(
-        entity="kaitwang",
-        project="cs336_alignment_A5_GRPO",
+        entity="kaitwang-stanford-university",
+        project="a5_a5_a5_grpo",
         name=run_name,
-        mode="offline",
+        mode="online",
         config=cfg,
     )
     wandb_step = 0
@@ -185,6 +185,15 @@ def train_grpo(cfg):
         tokenizations_train = tokenizations
 
         advantages_train, raw_rewards_train, metadata = compute_group_normalized_rewards(r1_zero_reward_fn, rollout_responses=generations, repeated_ground_truths=repeated_answers, group_size=group_size, advantage_eps=advantage_eps, normalize_by_std=use_std_normalization, device=device_model)
+        
+        # Print a few example rollouts
+        print("\n=== Example Rollouts ===")
+        for i in range(min(3, len(rollout_prompts))):
+            print(f"Prompt: {rollout_prompts[i]!r}")
+            print(f"Generated Output: {generations[i]!r}")
+            print(f"Reward: {raw_rewards_train[i].item()}")
+            print()
+        print("=======================\n")
         
         #compute the old_log_probs over the entire dataset (split into microbatches), if off policy
         num_train_steps_per_epoch = rollout_batch_size // train_batch_size
@@ -305,12 +314,20 @@ if __name__ == "__main__":
     loss_type = "reinforce_with_baseline"
     use_std_normalization = True
     use_constant_length_normalization = True
-    grpo_num_eval_samples = 500
-    n_grpo_steps = 1000000
+    group_size = 2
+    rollout_batch_size = 8
+    grpo_num_eval_samples = 50
+    n_grpo_steps = 1
+    epochs_per_rollout_batch = 1
+    sampling_max_tokens = 32
     cfg = parse_args()
+    cfg["group_size"] = group_size
     cfg["loss_type"] = loss_type
+    cfg["rollout_batch_size"] = rollout_batch_size
     cfg["use_std_normalization"] = use_std_normalization
+    cfg["epochs_per_rollout_batch"] = epochs_per_rollout_batch
     cfg["use_constant_length_normalization"] = use_constant_length_normalization
     cfg["grpo_num_eval_samples"] = grpo_num_eval_samples
     cfg["n_grpo_steps"] = n_grpo_steps
+    cfg["sampling_max_tokens"] = sampling_max_tokens
     train_grpo(cfg)
